@@ -166,8 +166,20 @@ class MPC:
     def predict_next_state_gt(self, states, actions):
         """Given a list of state action pairs, use the ground truth dynamics to predict the next state"""
         # TODO: write your code here
+        next_states = []
+        curr_state = self.env.get_state()
+        for state, action in zip(states, actions):
+            self.env.set_state(state)
+            next_state= self.env.get_nxt_state(state=state,action=action)
+            next_states.append(next_state)
+        self.env.set_state(curr_state)
+        return next_states
 
-        raise NotImplementedError
+
+        
+
+
+        #raise NotImplementedError
 
     def train(self, obs_trajs, acs_trajs, rews_trajs, num_train_itrs=5):
         """

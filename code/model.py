@@ -66,8 +66,12 @@ class PENN(nn.Module):
 
     def get_loss(self, targ, mean, logvar):
         # TODO: write your code here
-
-        raise NotImplementedError
+        # the output is a guassian distribution with mean and log variance
+        # loss is the negative log likelihood of the actual state 
+        loss = 0.5 * ((targ - mean) ** 2 / torch.exp(logvar) + logvar)
+        loss = loss.mean()
+        return loss 
+        #raise NotImplementedError
 
     def create_network(self, n):
         layer_sizes = [
@@ -97,5 +101,23 @@ class PENN(nn.Module):
 
         """
         # TODO: write your code here
+        avg_loss = []
+        for j in range(num_train_itrs):
+            total_loss = 0
+            for i in range(self.num_nets):
+                idx = np.random.choice(a=len(inputs), size=batch_size, replace=True)
+                sample_inputs = inputs[idx]
+                sample_targets = targets[idx]
+                mean, logvar = self.get_output(self.networks[i](sample_inputs))
+                loss = self.get_loss(sample_targets, mean, logvar)
+                total_loss +=loss.item()
+                self.opt.zero_grad()
+                loss.backward()
+                self.opt.step()
+                
+            avg_loss.append(total_loss /self.num_nets)
+        return avg_loss
+                
 
-        raise NotImplementedError
+
+        #raise NotImplementedError
