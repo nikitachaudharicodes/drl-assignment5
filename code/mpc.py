@@ -166,6 +166,27 @@ class MPC:
     def predict_next_state_gt(self, states, actions):
         """Given a list of state action pairs, use the ground truth dynamics to predict the next state"""
         # TODO: write your code here
+        
+        predicted_states = []
+        # looping through every (state, action) pair
+        # all_states: [popsize * num_particles, state_dim]
+        # all_actions: [popsize, action_dim]
+        # since num_particles = 1 for GT, we just have popsize many states/actions
+        
+        for idx in range(states.shape[0]):
+            # set the env to this particular state
+            # basically saying "pretend we’re here now"
+            self.env.set_state(states[idx].tolist())
+            
+            # take a step using the current action
+            # this gives the next state using the real dynamics
+            next_state, _, _, _ = self.env.step(actions[idx])
+            
+            # keep track of what next state we got
+            predicted_states.append(next_state)
+        
+        # convert everything to np array so it matches input shape
+        return np.array(predicted_states)
 
         raise NotImplementedError
 
