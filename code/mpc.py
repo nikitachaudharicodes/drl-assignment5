@@ -164,20 +164,20 @@ class MPC:
         actions_repeated = np.repeat(actions, self.num_particles, axis=0)
         inputs = np.concatenate([states,actions_repeated],axis=1)
         preds = self.model.forward(inputs)
-        
+        device = getattr(self.model, 'device', 'cpu')
         for i in range(len(states)):
             #state = states[i]
             network = np.random.choice(a=self.num_nets)
             mean, logvar = preds[network]
-            mean_i = mean[i:i+1]
-            logvar_i = logvar[i:i+1]
+            mean_i = mean[i]
+            logvar_i = logvar[i]
             #inputs = np.concatenate([state,actions_repeated[i]])
             #inputs = inputs.reshape(1,-1)
             #preds = self.model.forward(inputs)
             #mean, logvar = preds[network]
             std = torch.sqrt(torch.exp(logvar_i))
             delta = mean_i + std * torch.randn_like(std) 
-            delta_np = delta.detach().numpy()
+            delta_np = delta.detach().cpu().numpy()
             next_state = states[i] +delta_np[0]
             next_states.append(next_state)
         return np.array(next_states)

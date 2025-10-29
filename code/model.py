@@ -69,7 +69,7 @@ class PENN(nn.Module):
 
     def get_loss(self, targ, mean, logvar):
         # TODO: write your code here
-        loss = 0.5 * ((targ - mean) ** 2 / torch.exp(-logvar) + logvar)
+        loss = 0.5 * ((targ - mean) ** 2 / torch.exp(logvar) + logvar)
         loss = loss.mean()
         return loss 
         #raise NotImplementedError

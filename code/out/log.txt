@@ -1515,3 +1515,80 @@
 2025-10-28 20:53:17 run.py     INFO    : Warm up episode 899
 2025-10-28 20:53:17 run.py     INFO    : Warm up episode 999
 2025-10-28 20:53:17 mpc.py     INFO    : Train dynamics model with CEM for 100 iterations
+2025-10-28 20:53:38 run.py     INFO    : ### Q1.2.1: Train a single dynamics model f(s, a, phi) using a random policy
+2025-10-28 20:53:39 run.py     INFO    : ### Q1.2.1: Train from 1000 randomly sampled episodes with 100 iterations
+2025-10-28 20:53:39 run.py     INFO    : Warm up episode 0
+2025-10-28 20:53:39 run.py     INFO    : Warm up episode 99
+2025-10-28 20:53:39 run.py     INFO    : Warm up episode 199
+2025-10-28 20:53:39 run.py     INFO    : Warm up episode 299
+2025-10-28 20:53:39 run.py     INFO    : Warm up episode 399
+2025-10-28 20:53:40 run.py     INFO    : Warm up episode 499
+2025-10-28 20:53:40 run.py     INFO    : Warm up episode 599
+2025-10-28 20:53:40 run.py     INFO    : Warm up episode 699
+2025-10-28 20:53:40 run.py     INFO    : Warm up episode 799
+2025-10-28 20:53:40 run.py     INFO    : Warm up episode 899
+2025-10-28 20:53:40 run.py     INFO    : Warm up episode 999
+2025-10-28 20:53:40 mpc.py     INFO    : Train dynamics model with CEM for 100 iterations
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 font_manager.py WARNING : findfont: Font family 'normal' not found.
+2025-10-28 20:53:41 run.py     INFO    : ### Q1.2.2: Test with Random Policy for 50 episodes
+2025-10-28 20:53:41 run.py     INFO    : Test episode 0
+2025-10-28 21:50:00 run.py     INFO    : Test episode 9
