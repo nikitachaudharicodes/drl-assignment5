@@ -160,6 +160,29 @@ class MPC:
         # TODO: write your code here
         # REMEMBER: model prediction is delta
         # Next state = delta sampled from model prediction + CURRENT state!
+        next_states = []
+        actions_repeated = np.repeat(actions, self.num_particles, axis=0)
+        inputs = np.concatenate([states,actions_repeated],axis=1)
+        preds = self.model.forward(inputs)
+        
+        for i in range(len(states)):
+            #state = states[i]
+            network = np.random.choice(a=self.num_nets)
+            mean, logvar = preds[network]
+            mean_i = mean[i:i+1]
+            logvar_i = logvar[i:i+1]
+            #inputs = np.concatenate([state,actions_repeated[i]])
+            #inputs = inputs.reshape(1,-1)
+            #preds = self.model.forward(inputs)
+            #mean, logvar = preds[network]
+            std = torch.sqrt(torch.exp(logvar_i))
+            delta = mean_i + std * torch.randn_like(std) 
+            delta_np = delta.detach().numpy()
+            next_state = states[i] +delta_np[0]
+            next_states.append(next_state)
+        return np.array(next_states)
+
+
 
         raise NotImplementedError
 
@@ -176,11 +199,12 @@ class MPC:
         for idx in range(states.shape[0]):
             # set the env to this particular state
             # basically saying "pretend we’re here now"
-            self.env.set_state(states[idx].tolist())
+            #self.env.set_state(states[idx].tolist())
             
             # take a step using the current action
             # this gives the next state using the real dynamics
-            next_state, _, _, _ = self.env.step(actions[idx])
+            next_state = self.env.get_nxt_state(action=actions[idx],state= states[idx])
+            #self.env.step(actions[idx])
             
             # keep track of what next state we got
             predicted_states.append(next_state)

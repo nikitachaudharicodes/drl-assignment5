@@ -47,6 +47,9 @@ class PENN(nn.Module):
         self.opt = torch.optim.Adam(self.networks.parameters(), lr=learning_rate)
 
     def forward(self, inputs):
+        #print("FORWARD")
+        #print(type(inputs))
+        #print(inputs)
         if not torch.is_tensor(inputs):
             inputs = torch.tensor(inputs, device=self.device, dtype=torch.float)
         return [self.get_output(self.networks[i](inputs)) for i in range(self.num_nets)]
@@ -66,8 +69,10 @@ class PENN(nn.Module):
 
     def get_loss(self, targ, mean, logvar):
         # TODO: write your code here
-
-        raise NotImplementedError
+        loss = 0.5 * ((targ - mean) ** 2 / torch.exp(-logvar) + logvar)
+        loss = loss.mean()
+        return loss 
+        #raise NotImplementedError
 
     def create_network(self, n):
         layer_sizes = [
@@ -97,5 +102,20 @@ class PENN(nn.Module):
 
         """
         # TODO: write your code here
-
-        raise NotImplementedError
+        avg_loss = []
+        for j in range(num_train_itrs):
+            total_loss = 0 
+            for i in range(self.num_nets):
+                idx = np.random.choice(a=len(inputs), size=batch_size, replace=True)
+                sample_inputs = torch.tensor(inputs[idx], dtype=torch.float)
+                sample_targets = torch.tensor(targets[idx], dtype=torch.float)
+                output = self.networks[i](sample_inputs)
+                mean, logvar = self.get_output(output)
+                loss = self.get_loss(sample_targets, mean, logvar)
+                total_loss += loss.item()
+                self.opt.zero_grad()
+                loss.backward()
+                self.opt.step()
+            avg_loss.append(total_loss / self.num_nets)
+        return avg_loss
+        #raise NotImplementedError
