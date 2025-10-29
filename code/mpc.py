@@ -167,7 +167,8 @@ class MPC:
         device = getattr(self.model, 'device', 'cpu')
         for i in range(len(states)):
             #state = states[i]
-            network = np.random.choice(a=self.num_nets)
+            # need to use guassian sampling here
+            network = np.random.randint(0,self.num_nets)
             mean, logvar = preds[network]
             mean_i = mean[i]
             logvar_i = logvar[i]
@@ -178,7 +179,7 @@ class MPC:
             std = torch.sqrt(torch.exp(logvar_i))
             delta = mean_i + std * torch.randn_like(std) 
             delta_np = delta.detach().cpu().numpy()
-            next_state = states[i] +delta_np[0]
+            next_state = states[i] +delta_np
             next_states.append(next_state)
         return np.array(next_states)
 
