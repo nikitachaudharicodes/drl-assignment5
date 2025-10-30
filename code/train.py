@@ -75,29 +75,30 @@ class TrainerTD3:
     def get_synthetic_transition(self, state, action):
         # TODO: write your code here
         # randomly choose a network from ensemble and get new state from it
-        state = np.asarray(state, dtype =np.float32)
-        action = np.asarray(action, dtype =np.float32)
+        state = np.asarray(state, dtype=np.float32)
+        action = np.asarray(action, dtype=np.float32)
         
-        state_part = state[:-2]   
-        goal_part = state[-2:]    
-        sa = np.concatenate([state_part, action], axis =0)
-        sa_torch = torch.from_numpy(sa).float().to(self.model.device).unsqueeze(0)
-
+        state_part = state[:STATE_DIM]
+        goal_part = state[STATE_DIM:]
+        sa = np.concatenate([state_part, action], axis=0)
+        sa_t = torch.from_numpy(sa).float().to(self.model.device).unsqueeze(0)
+        
         with torch.no_grad():
-            means_list, logvars_list = self.model.forward(sa_torch)
+            means_list, logvars_list = self.model.forward(sa_t)
             net_idx = np.random.randint(0, self.model.num_nets)
             mean = means_list[net_idx][0]
             logvar = logvars_list[net_idx][0]
             std = torch.exp(0.5 * logvar)
             eps = torch.randn_like(std)
             delta = mean + std * eps
-
-            next_state_part = (state_part + delta.cpu().numpy())
-            full_next_state_w_goal = np.concatenate([next_state_part, goal_part], axis =0)
+            
+            delta_np = delta.squeeze(0).cpu().numpy()
+            next_state_part = (state_part + delta_np)
+            full_next_state_w_goal = np.concatenate([next_state_part, goal_part], axis=0)
             new_state = full_next_state_w_goal
             return self.env.step_state(
                 new_state.tolist()
-            ) # pass in new state to the env for the full transition
+            )# pass in new state to the env for the full transition
 
     def train_td3_with_mix(
         self,
