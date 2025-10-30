@@ -31,7 +31,9 @@ class TrainerTD3:
         self.expl_noise = expl_noise
 
         self.model = PENN(num_nets, STATE_DIM, self.action_dim, LR, device=device)
-        self.model.load_state_dict(torch.load("model.pt"))
+        # self.model.load_state_dict(torch.load("model.pt"))
+        self.model.load_state_dict(torch.load("model.pt", map_location = torch.device("cpu")))
+
 
         # Set seeds
         self.env.seed(seed)
@@ -73,10 +75,40 @@ class TrainerTD3:
     def get_synthetic_transition(self, state, action):
         # TODO: write your code here
         # randomly choose a network from ensemble and get new state from it
-        new_state = ...
-        return self.env.step_state(
-            new_state.tolist()
-        )  # pass in new state to the env for the full transition
+        s = torch.tensor(state, dtype = torch.float32, device = self.model.device).unsqueeze(0)
+        a = torch.tensor(action, dtype = torch.float32, device = self.model.device).unsqueeze(0)
+        # sa = torch.cat([s, a], dim = 1)  
+
+        # with torch.no_grad():
+        #     means_list, logvars_list = self.model.forward(sa)
+
+        #     net_idx = np.random.randint(0, self.model.num_nets)
+        #     mean = means_list[net_idx][0]      
+        #     logvar = logvars_list[net_idx][0]   
+        #     std = torch.exp(0.5 * logvar)     
+        #     eps = torch.randn_like(std)
+        #     delta = mean + std * eps
+
+        #     new_state = (s[0] + delta).cpu().numpy()
+        state_part = s[:,:-2]   
+        goal_part = s[:,-2:]    
+        sa = torch.cat([state_part, a], dim = 1)
+
+        with torch.no_grad():
+            means_list, logvars_list = self.model.forward(sa)
+            net_idx = np.random.randint(0, self.model.num_nets)
+            mean = means_list[net_idx][0]
+            logvar = logvars_list[net_idx][0]
+            std = torch.exp(0.5 * logvar)
+            eps = torch.randn_like(std)
+            delta = mean + std * eps
+
+            next_state_part = (state_part[0] + delta).cpu().numpy()
+            full_next_state_w_goal = np.concatenate([next_state_part, goal_part.cpu().numpy().squeeze()], axis = 0)
+            new_state = full_next_state_w_goal
+            return self.env.step_state(
+                new_state.tolist()
+            )  # pass in new state to the env for the full transition
 
     def train_td3_with_mix(
         self,
